@@ -1,0 +1,34 @@
+# ─────────────────────────────────────────────────────────────
+#  SEGREDOS — NUNCA versionar
+# ─────────────────────────────────────────────────────────────
+
+# Variáveis de ambiente com senhas e chave de criptografia
+.env
+n8n.env
+# (mas mantém os templates de exemplo)
+!.env.example
+!n8n.env.example
+
+# Senhas em arquivo (docker secrets)
+secrets/*
+!secrets/*.example
+
+# Certificados TLS — contém a CHAVE PRIVADA
+nginx/certs/*
+!nginx/certs/.gitkeep
+
+# ─────────────────────────────────────────────────────────────
+#  Dados persistentes dos containers (volumes bind-mount)
+# ─────────────────────────────────────────────────────────────
+postgres-data/
+redis-data/
+n8n-data/
+
+# ─────────────────────────────────────────────────────────────
+#  Diversos
+# ─────────────────────────────────────────────────────────────
+*.log
+*.bak
+*.tmp
+*.swp
+.DS_Store

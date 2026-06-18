@@ -1,0 +1,5 @@
+# Coloque aqui server.crt e server.key (NAO versionados).
+# Self-signed de teste:
+#   openssl req -x509 -nodes -newkey rsa:2048 -keyout server.key -out server.crt \
+#     -days 825 -subj "/CN=n8n.editoraglobo.com.br" \
+#     -addext "subjectAltName=DNS:n8n.editoraglobo.com.br"
