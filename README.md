@@ -43,7 +43,7 @@ O script `setup.sh` provisiona tudo de forma idempotente:
 sudo ./setup.sh
 ```
 
-Ele:
+O que ele faz:
 1. cria `postgres-data/`, `redis-data/`, `n8n-data/` com o dono correto
    (`999:999` para postgres/redis, `1000:1000` para n8n);
 2. gera segredos aleatórios e os grava de forma **consistente** em
@@ -123,6 +123,7 @@ docker compose exec nginx nginx -s reload   # recarregar nginx (cert/config)
 
 - **Alterou `n8n.env` ou `.env`?** recrie o container para reler as variáveis:
   `docker compose up -d --force-recreate n8n`
+  
 - **Alterou só `nginx/nginx.conf` ou o cert?** basta `nginx -s reload`.
 
 ## Acesso
