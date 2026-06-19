@@ -72,29 +72,6 @@ services:
       timeout: 5s
       retries: 5
 
-  n8n-worker:
-    image: n8nio/n8n:2.26.7-amd64
-    user: "1000:1000"
-    restart: unless-stopped
-    command: worker
-    env_file:
-      - n8n.env
-    volumes:
-      - ./n8n-data:/home/node/.n8n
-    networks:
-      - n8n-net
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    security_opt:
-      - no-new-privileges:true
-    read_only: true
-    tmpfs:
-      - /tmp
-      - /home/node/.cache
-
   nginx:
     image: nginx:trixie-perl
     restart: unless-stopped
