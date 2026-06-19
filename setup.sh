@@ -10,7 +10,7 @@
 #
 set -euo pipefail
 
-DOMAIN="n8n.editoraglobo.com.br"
+DOMAIN="n8n.edglobo.com.br"
 
 cd "$(dirname "$(readlink -f "$0")")"
 

@@ -64,7 +64,7 @@ Verifique:
 
 ```bash
 docker compose ps          # todos healthy
-curl -sk https://localhost/healthz -H "Host: n8n.editoraglobo.com.br"
+curl -sk https://localhost/healthz -H "Host: n8n.edglobo.com.br"
 ```
 
 ### Provisionamento manual (equivalente ao script)
@@ -88,8 +88,8 @@ sudo chown 999:999 secrets/postgres_password.txt && sudo chmod 400 secrets/postg
 # 3) certificado (self-signed de teste — troque pelo real depois)
 openssl req -x509 -nodes -newkey rsa:2048 \
   -keyout nginx/certs/server.key -out nginx/certs/server.crt \
-  -days 825 -subj "/CN=n8n.editoraglobo.com.br" \
-  -addext "subjectAltName=DNS:n8n.editoraglobo.com.br"
+  -days 825 -subj "/CN=n8n.edglobo.com.br" \
+  -addext "subjectAltName=DNS:n8n.edglobo.com.br"
 
 # 4) subir
 docker compose up -d
@@ -205,7 +205,7 @@ docker compose down                      # parar (aguarda jobs em andamento via 
 
 ## Acesso
 
-- URL: **https://n8n.editoraglobo.com.br** (aponte o DNS para este host).
+- URL: **https://n8n.edglobo.com.br** (aponte o DNS para este host).
 - Enquanto o DNS não resolver, acesse pelo IP do host — o aviso de certificado
   some quando o cert real for instalado.
 - `http://` é redirecionado para `https://` automaticamente.
