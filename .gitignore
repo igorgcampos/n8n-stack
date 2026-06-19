@@ -1,7 +1,3 @@
-# ─────────────────────────────────────────────────────────────
-#  SEGREDOS — NUNCA versionar
-# ─────────────────────────────────────────────────────────────
-
 # Variáveis de ambiente com senhas e chave de criptografia
 .env
 n8n.env
