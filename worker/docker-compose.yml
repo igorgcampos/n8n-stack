@@ -1,0 +1,24 @@
+services:
+  n8n-worker:
+    image: n8nio/n8n:2.26.7-amd64
+    user: "1000:1000"
+    restart: unless-stopped
+    command: worker
+    env_file:
+      - n8n-worker.env
+    volumes:
+      - ./n8n-data:/home/node/.n8n
+    ports:
+      # Exposto localmente apenas para health check (não precisa ser público)
+      - "127.0.0.1:5679:5678"
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /home/node/.cache
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:5678/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 5

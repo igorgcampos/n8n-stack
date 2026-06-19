@@ -1,15 +1,26 @@
-# Variáveis de ambiente com senhas e chave de criptografia
+# ─────────────────────────────────────────────────────────────
+#  Variáveis de ambiente com senhas e chave de criptografia
+# ─────────────────────────────────────────────────────────────
 .env
 n8n.env
-# (mas mantém os templates de exemplo)
 !.env.example
 !n8n.env.example
 
-# Senhas em arquivo (docker secrets)
+# ─────────────────────────────────────────────────────────────
+#  Worker GCP
+# ─────────────────────────────────────────────────────────────
+worker/n8n-worker.env
+worker/n8n-data/
+
+# ─────────────────────────────────────────────────────────────
+#  Senhas em arquivo (docker secrets)
+# ─────────────────────────────────────────────────────────────
 secrets/*
 !secrets/*.example
 
-# Certificados TLS — contém a CHAVE PRIVADA
+# ─────────────────────────────────────────────────────────────
+#  Certificados TLS — contém a CHAVE PRIVADA
+# ─────────────────────────────────────────────────────────────
 nginx/certs/*
 !nginx/certs/.gitkeep
 
