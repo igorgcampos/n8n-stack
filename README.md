@@ -4,6 +4,29 @@ Self-hosted do **n8n** em modo fila (`queue`), com PostgreSQL, Redis e nginx
 fazendo terminação TLS na frente. Pensado para rodar atrás da rede interna e,
 opcionalmente, ter *workers* externos (ex.: GCP) consumindo a fila via VPN/VPC.
 
+## Por que PostgreSQL e Redis no compose?
+
+Por padrão o n8n usa **SQLite** — um arquivo local dentro do próprio container.
+Isso funciona para uso individual, mas inviabiliza qualquer cenário com mais de
+uma instância, pois cada container teria seu próprio banco isolado.
+
+Este stack usa **PostgreSQL** e **Redis** para suportar o worker do GCP:
+
+| Serviço | Motivo |
+|---|---|
+| **PostgreSQL** | Banco compartilhado entre master e worker. O worker precisa ler a definição dos workflows e gravar os resultados das execuções no mesmo lugar que o master. Com SQLite isso é impossível — o arquivo é local e não pode ser acessado por outra máquina. |
+| **Redis** | Fila de mensagens entre master e worker. Quando o worker GCP está ativo e o master entra em `queue` mode, o master enfileira as execuções no Redis e o worker as consome. Sem Redis não há coordenação entre instâncias. |
+
+Ambas as portas (`5432` e `6379`) ficam publicadas no host justamente para que
+o worker GCP consiga alcançá-las via VPN/VPC interna.
+
+> Mesmo com o master rodando em `EXECUTIONS_MODE=regular` (executando workflows
+> localmente, sem worker), o PostgreSQL já é usado no lugar do SQLite por ser
+> mais robusto para produção. O Redis fica disponível para quando o worker GCP
+> precisar ser ativado, bastando mudar o modo para `queue`.
+
+---
+
 ## Arquitetura
 
 ```
